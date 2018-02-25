@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Pizzas</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let pizza of pizzas">
+      <img [src]="pizza.image"/>
+      <ion-card-content>
+        <ion-card-title>
+          {{pizza.name}}
+        </ion-card-title>
+        <p>
+          Price : {{pizza.priceCts | convertCts}}
+        </p>
+        <p>
+          Cook : {{pizza.cook.firstName}} {{pizza.cook.lastName}}
+        </p>
+      </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <button ion-button clear *ngIf="nav.getStateLogged()" (click)="edit(pizza._id)">
+            Edit
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <button ion-button clear (click)="details(pizza._id)">
+            More...
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-list>
+</ion-content>

@@ -6,23 +6,18 @@
     "experimentalDecorators": true,
     "lib": [
       "dom",
-      "es2015"
+      "es7"
     ],
     "module": "es2015",
     "moduleResolution": "node",
     "sourceMap": true,
-    "target": "es5",
-    "typeRoots": [
-      "../node_modules/@types"
-    ]
+    "target": "es5"
   },
   "include": [
     "src/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "src/**/*.spec.ts",
-    "src/**/__tests__/*.ts"
+    "node_modules"
   ],
   "compileOnSave": false,
   "atom": {

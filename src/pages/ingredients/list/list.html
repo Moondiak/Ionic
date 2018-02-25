@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Ingredients</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="add()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-card *ngFor="let ingredient of ingredients">
+      <ion-card-content>
+        <ion-card-title>
+          {{ingredient.name}}
+        </ion-card-title>
+        <p>
+          Price : {{ingredient.priceCts | convertCts}}
+        </p>
+        <p>
+          Weight : {{ingredient.weight}} gr
+        </p>
+      </ion-card-content>
+      <ion-row>
+        <ion-col>
+          <button ion-button clear *ngIf="nav.getStateLogged()" (click)="edit(ingredient._id)">
+            Edit
+          </button>
+        </ion-col>
+        <ion-col center text-center>
+          <button ion-button clear (click)="details(ingredient._id)">
+            More...
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </ion-list>
+</ion-content>

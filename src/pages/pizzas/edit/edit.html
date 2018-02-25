@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="!id">Add</ion-title>
+    <ion-title *ngIf="id">Update</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Pizza</h3>
+
+  <form [formGroup]="form" (submit)="edit()">
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Price</ion-label>
+      <ion-input type="number" formControlName="priceCts"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Description</ion-label>
+      <ion-textarea formControlName="description"></ion-textarea>
+    </ion-item>
+
+    <img *ngIf="currentPizza.image" width="100px"
+         [src]="sanitizer.bypassSecurityTrustResourceUrl(currentPizza.image)">
+    <button ion-button (click)="takePicture()">Take pizza photo</button>
+
+    <ion-list>
+      <ion-label>Ingredients :</ion-label>
+      <ion-item *ngFor="let ingredient of ingredients">
+        <ion-label>{{ingredient.item.name}}</ion-label>
+        <ion-checkbox (ionChange)="change()" [(ngModel)]="ingredient.checked" [ngModelOptions]="{standalone: true}" [(checked)]="ingredient.checked"></ion-checkbox>
+      </ion-item>
+    </ion-list>
+
+    <button *ngIf="!id && authService.isAuthenticated()" ion-button type="submit"
+            [disabled]="!form.valid || !picture || !haveIngredients">Add
+    </button>
+    <button *ngIf="id && authService.isAuthenticated()" ion-button type="submit"
+            [disabled]="!form.valid || !haveIngredients">Update
+    </button>
+    <button *ngIf="id && authService.isAuthenticated()" ion-button type="button" (click)="remove()">
+      Delete
+    </button>
+  </form>
+
+</ion-content>

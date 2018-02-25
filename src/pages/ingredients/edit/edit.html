@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title *ngIf="!id">Add</ion-title>
+    <ion-title *ngIf="id">Update</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Ingredient</h3>
+
+  <form [formGroup]="form" (submit)="edit()">
+    <ion-item>
+      <ion-label floating>Name</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Price</ion-label>
+      <ion-input type="number" formControlName="priceCts"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Weight</ion-label>
+      <ion-input type="number" formControlName="weight"></ion-input>
+    </ion-item>
+
+    <button *ngIf="!id && authService.isAuthenticated()" type="submit" ion-button [disabled]="!form.valid">Add</button>
+    <button *ngIf="id && authService.isAuthenticated()" type="submit" ion-button [disabled]="!form.valid">Update</button>
+    <button *ngIf="id && authService.isAuthenticated()" type="button" ion-button (click)="remove()">Delete</button>
+  </form>
+
+</ion-content>
